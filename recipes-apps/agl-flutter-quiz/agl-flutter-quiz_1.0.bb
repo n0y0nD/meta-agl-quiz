@@ -1,19 +1,15 @@
-SUMMARY = "AGL GSoC 2026 Flutter Quiz App"
-DESCRIPTION = "Flutter app showing AGL version, name, image and sound"
-AUTHOR = "Nayanjyoti Das"
-HOMEPAGE = "https://github.com/n0y0nD/agl-flutter-quiz-app"
+SUMMARY = "AGL Flutter Quiz App"
+DESCRIPTION = "Flutter quiz App"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0"
 
-SRC_URI = "git://github.com/n0y0nD/agl-flutter-quiz-app.git;protocol=https;branch=main"
-SRCREV = "${AUTOREV}"
-S = "${WORKDIR}/git"
+SRC_URI = "file://."
 
-inherit flutter-app
+S = "${WORKDIR}"
 
-FLUTTER_APPLICATION_PATH = "."
-FLUTTER_BUILD_ARGS = "bundle"
+do_install() {
+    install -d ${D}/opt/agl-flutter-quiz
+    cp -r ${WORKDIR}/* ${D}/opt/agl-flutter-quiz
+}
 
-RDEPENDS:${PN} += "mpg123"
+FILES:${PN} += "/opt/agl-flutter-quiz"
 
-FILES:${PN} += "${datadir}/agl-flutter-quiz"
